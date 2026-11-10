@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c0d12">
+
+    <title>Forma — Workspace</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="brand-icon">F</div>
+                <span>forma<span class="brand-dot">.</span></span>
+                <button class="CPP_BINDING">Click Me</button>
+        </div>
+
+        <div class="workspace-switcher">
+            <div class="workspace-avatar">S</div>
+            <div class="workspace-info">
+                <strong>Studio Workspace</strong>
+                <small>Personal space</small>
+            </div>
+            <span class="switch-arrow">⌄</span>
+        </div>
+
+        <div class="nav-section">
+            <span class="section-label">WORKSPACE</span>
+
+            <nav>
+                <a href="#" class="nav-item active" data-page="Overview">
+                    <span class="nav-icon">◫</span> Overview
+                </a>
+                <a href="#" class="nav-item" data-page="Projects">
+                    <span class="nav-icon">▦</span> Projects
+                    <span class="nav-count">4</span>
+                </a>
+                <a href="#" class="nav-item" data-page="Tasks">
+                    <span class="nav-icon">☑</span> My tasks
+                </a>
+                <a href="#" class="nav-item" data-page="Calendar">
+                    <span class="nav-icon">▣</span> Calendar
+                </a>
+            </nav>
+        </div>
+
+        <div class="nav-section">
+            <span class="section-label">PERSONAL</span>
+
+            <nav>
+                <a href="#" class="nav-item" data-page="Activity">
+                    <span class="nav-icon">◷</span> Activity
+                </a>
+                <a href="#" class="nav-item" data-page="Settings">
+                    <span class="nav-icon">⚙</span> Settings
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="upgrade-card">
+                <div class="upgrade-icon">✦</div>
+                <strong>Your space, your pace.</strong>
+                <p>A little progress every day adds up.</p>
+            </div>
+
+            <div class="profile">
+                <div class="profile-avatar">S</div>
+                <div class="profile-info">
+                    <strong>Sans</strong>
+                    <small>Personal account</small>
+                </div>
+                <span class="profile-menu">···</span>
+            </div>
+        </div>
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="breadcrumb">
+                <button class="mobile-menu" id="menuToggle">☰</button>
+                <span>Workspace</span>
+                <span class="breadcrumb-separator">/</span>
+                <strong id="pageTitle">Overview</strong>
+            </div>
+
+            <div class="topbar-actions">
+                <div class="search-box">
+                    <span>⌕</span>
+                    <input type="text" id="searchInput" placeholder="Search anything...">
+                    <kbd>⌘ K</kbd>
+                </div>
+                <button class="icon-button" title="Notifications">♧</button>
+                <button class="icon-button" id="themeToggle" title="Toggle theme">◐</button>
+            </div>
+        </header>
+
+
+        <div class="content">
+
+            <section class="welcome">
+                <div>
+                    <div class="eyebrow">
+                        <span class="live-dot"></span>
+                        YOUR WORKSPACE
+                    </div>
+                    <h1>Good to see you, Sans <span>✳</span></h1>
+                    <p>Here's what's happening in your workspace today.</p>
+                </div>
+
+                <button class="primary-button" id="newTask">
+                    <span>＋</span> New task
+                </button>
+            </section>
+
+
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total projects</span>
+                        <span class="stat-icon purple">▦</span>
+                    </div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-footer">
+                        <span class="positive">↗ 2</span>
+                        <span>from last month</span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Tasks completed</span>
+                        <span class="stat-icon green">✓</span>
+                    </div>
+                    <div class="stat-value">48</div>
+                    <div class="stat-footer">
+                        <span class="positive">↗ 12%</span>
+                        <span>from last month</span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>In progress</span>
+                        <span class="stat-icon blue">◷</span>
+                    </div>
+                    <div class="stat-value">08</div>
+                    <div class="stat-footer">
+                        <span class="neutral">Active</span>
+                        <span>across 4 projects</span>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Productivity</span>
+                        <span class="stat-icon orange">✦</span>
+                    </div>
+                    <div class="stat-value">86<span class="percentage">%</span></div>
+                    <div class="stat-footer">
+                        <span class="positive">↗ 8.4%</span>
+                        <span>from last month</span>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <section class="dashboard-grid">
+
+                <article class="panel activity-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Activity overview</h2>
+                            <p>Your productivity over the last week</p>
+                        </div>
+
+                        <select id="chartPeriod">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                        </select>
+                    </div>
+
+                    <div class="chart-summary">
+                        <strong>32.5<span> hrs</span></strong>
+                        <span class="positive">↗ 14.2%</span>
+                    </div>
+
+                    <div class="chart">
+                        <div class="chart-y-axis">
+                            <span>10h</span>
+                            <span>7.5h</span>
+                            <span>5h</span>
+                            <span>2.5h</span>
+                            <span>0h</span>
+                        </div>
+
+                        <div class="chart-area">
+                            <div class="chart-grid">
+                                <span></span><span></span><span></span>
+                                <span></span><span></span>
+                            </div>
+
+                            <div class="bars" id="chartBars">
+                                <div class="bar-column"><div class="bar" style="--height:42%"></div><span>Mon</span></div>
+                                <div class="bar-column"><div class="bar" style="--height:68%"></div><span>Tue</span></div>
+                                <div class="bar-column"><div class="bar" style="--height:55%"></div><span>Wed</span></div>
+                                <div class="bar-column"><div class="bar" style="--height:85%"></div><span>Thu</span></div>
+                                <div class="bar-column"><div class="bar" style="--height:62%"></div><span>Fri</span></div>
+                                <div class="bar-column"><div class="bar" style="--height:95%"></div><span>Sat</span></div>
+                                <div class="bar-column"><div class="bar" style="--height:38%"></div><span>Sun</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="panel goals-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Weekly goals</h2>
+                            <p>Keep up the momentum</p>
+                        </div>
+                        <button class="more-button">···</button>
+                    </div>
+
+                    <div class="goal-progress">
+                        <div class="progress-ring">
+                            <div class="ring-inner">
+                                <strong>72%</strong>
+                                <small>Completed</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="goal-legend">
+                        <div><span class="legend-dot purple-bg"></span> Completed <strong>18</strong></div>
+                        <div><span class="legend-dot muted-bg"></span> Remaining <strong>7</strong></div>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <section class="bottom-grid">
+
+                <article class="panel projects-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Recent projects</h2>
+                            <p>Keep an eye on what you're building</p>
+                        </div>
+                        <button class="text-button" data-page="Projects">View all ↗</button>
+                    </div>
+
+                    <div class="project-list" id="projectList">
+
+                        <div class="project-row">
+                            <div class="project-logo project-purple">◈</div>
+                            <div class="project-details">
+                                <strong>Project Aurora</strong>
+                                <small>Design & Development</small>
+                            </div>
+                            <div class="project-progress">
+                                <div class="mini-progress"><span style="width:75%"></span></div>
+                                <small>75%</small>
+                            </div>
+                            <span class="status status-progress">In progress</span>
+                        </div>
+
+                        <div class="project-row">
+                            <div class="project-logo project-blue">◉</div>
+                            <div class="project-details">
+                                <strong>Website Redesign</strong>
+                                <small>UI / UX Design</small>
+                            </div>
+                            <div class="project-progress">
+                                <div class="mini-progress"><span style="width:45%"></span></div>
+                                <small>45%</small>
+                            </div>
+                            <span class="status status-review">In review</span>
+                        </div>
+
+                        <div class="project-row">
+                            <div class="project-logo project-orange">◇</div>
+                            <div class="project-details">
+                                <strong>Analytics Engine</strong>
+                                <small>Backend Development</small>
+                            </div>
+                            <div class="project-progress">
+                                <div class="mini-progress"><span style="width:90%"></span></div>
+                                <small>90%</small>
+                            </div>
+                            <span class="status status-complete">Almost done</span>
+                        </div>
+
+                    </div>
+                </article>
+
+
+                <article class="panel tasks-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>My tasks</h2>
+                            <p>Things on your plate</p>
+                        </div>
+                        <button class="more-button">···</button>
+                    </div>
+
+                    <div class="task-list" id="taskList">
+
+                        <label class="task-row">
+                            <input type="checkbox">
+                            <span class="custom-check"></span>
+                            <span class="task-name">Review project proposal</span>
+                            <span class="task-priority high">High</span>
+                        </label>
+
+                        <label class="task-row">
+                            <input type="checkbox">
+                            <span class="custom-check"></span>
+                            <span class="task-name">Update design system</span>
+                            <span class="task-priority medium">Medium</span>
+                        </label>
+
+                        <label class="task-row">
+                            <input type="checkbox">
+                            <span class="custom-check"></span>
+                            <span class="task-name">Fix navigation issues</span>
+                            <span class="task-priority low">Low</span>
+                        </label>
+
+                        <label class="task-row">
+                            <input type="checkbox">
+                            <span class="custom-check"></span>
+                            <span class="task-name">Prepare release notes</span>
+                            <span class="task-priority medium">Medium</span>
+                        </label>
+
+                    </div>
+
+                    <button class="add-task-button" id="addTask">＋ Add a task</button>
+                </article>
+
+            </section>
+
+            <footer>
+                <span>© 2026 Forma Workspace</span>
+                <span>Made for getting things done <span class="footer-heart">♥</span></span>
+            </footer>
+
+        </div>
+    </main>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+</body>
+</html>
