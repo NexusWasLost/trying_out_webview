@@ -40,7 +40,7 @@ std::string lumi(const std::string& req){
 
     for(int x = 0; x < lumi.diskCount; x++){
         json disk;
-        disk["diskLetter"] = wideToUtf8(&lumi.disks[x].diskLetter);
+        disk["diskLetter"] = std::string(1, static_cast<char>(lumi.disks[x].diskLetter));
         disk["fileSystemName"] = wideToUtf8(lumi.disks[x].fileSystemName);
         disk["volumeLabel"] = wideToUtf8(lumi.disks[x].volumeLabel) ;
         disk["totalSpace"] = lumi.disks[x].totalSpace;
