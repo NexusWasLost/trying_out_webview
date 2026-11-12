@@ -27,16 +27,33 @@ std::string wideToUtf8(wchar_t* wideText) {
 std::string lumi(const std::string& req){
     LUMI lumi;
 
-    getCPU(&lumi);
     getMemory(&lumi);
+    getCPU(&lumi);
+    getGPU(&lumi);
+    getOS(&lumi);
+    getDisplay(&lumi);
+    getCurrentUsername(&lumi);
+    getHostName(&lumi);
+    getUptime(&lumi);
+    getLocale(&lumi);
+    getNetwork(&lumi);
     getDisk(&lumi);
 
     json j;
 
-    j["cpu"] = lumi.CPU_Architecture;
+    j["cpu_architecture"] = lumi.CPU_Architecture;
+    j["cpu"] = lumi.CPU;
     j["totalRAM"] = lumi.totalMemory;
     j["availableRAM"] = lumi.availableMemory;
     j["usedRAM"] = lumi.usedMemory;
+    j["RAMload"] = lumi.memoryLoad;
+    j["OSProductName"] = lumi.OS_ProductName;
+    j["OS_Version"] = lumi.OS_Version;
+    j["OS_BuildNumber"] = lumi.OS_BuildNumber;
+    j["host"] = lumi.host;
+    j["username"] = lumi.currentUserName;
+    j["locale"] = wideToUtf8(lumi.locale);
+    j["uptime"] = lumi.uptime;
 
     for(int x = 0; x < lumi.diskCount; x++){
         json disk;
@@ -47,6 +64,28 @@ std::string lumi(const std::string& req){
         disk["freeSpace"] = lumi.disks[x].freeSpace;
         disk["usedSpace"] = lumi.disks[x].usedSpace;
         j["disks"].push_back(disk);
+    }
+
+    for(int x = 0; x < lumi.networkAdapterCount; x++){
+        json net;
+        net["networkAdapterName"] = wideToUtf8(lumi.net_Adapters[x].networkAdapterName);
+        net["networkAdapterDesc"] = wideToUtf8(lumi.net_Adapters[x].networkAdapterDesc);
+        j["network"].push_back(net);
+    }
+
+    for(int x = 0; x < lumi.gpuCount; x++){
+        json __gpu;
+        __gpu["GPU_Name"] = wideToUtf8(lumi.gpu[x].GPU_Name);
+        __gpu["GPU_VRAM"] = lumi.gpu[x].totalVRAM;
+        j["Graphics"].push_back(__gpu);
+    }
+
+    for(int x = 0; x < lumi.displayCount; x++){
+        json disp;
+        disp["width"] = lumi.monitors[x].width;
+        disp["height"] = lumi.monitors[x].height;
+        disp["refreshRate"] = lumi.monitors[x].refreshRate;
+        j["display"].push_back(disp);
     }
 
     return j.dump();
