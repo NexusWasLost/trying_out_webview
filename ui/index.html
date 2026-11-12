@@ -3,21 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumi</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title>Lumi — System Telemetry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <header>
-        <h1>Lumi</h1>
+    <!-- Ambient Grid & Radial Spotlight Layer -->
+    <div class="ambient-grid"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- SaaS Navigation Header -->
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="1" x2="9" y2="4"></line>
+                        <line x1="15" y1="1" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="23"></line>
+                        <line x1="15" y1="20" x2="15" y2="23"></line>
+                        <line x1="20" y1="9" x2="23" y2="9"></line>
+                        <line x1="20" y1="14" x2="23" y2="14"></line>
+                        <line x1="1" y1="9" x2="4" y2="9"></line>
+                        <line x1="1" y1="14" x2="4" y2="14"></line>
+                    </svg>
+                </div>
+                <span class="brand-name">LUMI</span>
+                <span class="divider">/</span>
+                <div class="host-pill">
+                    <span class="status-dot"></span>
+                    <span class="mono" id="host-user">Loading...</span>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <span class="badge mono" id="locale-badge">--</span>
+                <div class="meta-pill">
+                    <span class="meta-label">UPTIME</span>
+                    <span class="mono" id="uptime-value">--</span>
+                </div>
+                <button id="refresh-btn" class="btn-refresh" title="Poll Live Hardware Metrics">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+                        <path d="M16 16h5v5"></path>
+                    </svg>
+                    <span>Sync</span>
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main id="content">
-        <p class="placeholder">Fetching...</p>
+    <!-- Main Dashboard Workspace -->
+    <main class="container">
+        <div class="section-intro">
+            <h2>Hardware Telemetry</h2>
+            <p>Real-time local machine specifications and resource allocation</p>
+        </div>
+
+        <section class="bento-grid">
+            <!-- CPU Card -->
+            <article class="card span-2">
+                <div class="card-header">
+                    <span class="card-title">PROCESSOR</span>
+                    <span class="badge mono" id="cpu-arch">--</span>
+                </div>
+                <div class="card-primary-value" id="cpu-name">--</div>
+            </article>
+
+            <!-- OS Card -->
+            <article class="card">
+                <div class="card-header">
+                    <span class="card-title">OPERATING SYSTEM</span>
+                    <span class="badge mono" id="os-version-badge">--</span>
+                </div>
+                <div class="card-primary-value" id="os-name">--</div>
+                <div class="card-sub-meta mono" id="os-build-detail">--</div>
+            </article>
+
+            <!-- Memory Card -->
+            <article class="card span-3">
+                <div class="card-header">
+                    <span class="card-title">MEMORY ALLOCATION</span>
+                    <span class="mono highlight-text" id="ram-percent">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="ram-bar" style="width: 0%;"></div>
+                </div>
+                <div class="ram-stats">
+                    <span>Used: <strong class="mono" id="ram-used">--</strong></span>
+                    <span>Available: <strong class="mono" id="ram-avail">--</strong></span>
+                    <span>Total: <strong class="mono" id="ram-total">--</strong></span>
+                </div>
+            </article>
+
+            <!-- Graphics Card -->
+            <article class="card span-2">
+                <div class="card-header">
+                    <span class="card-title">GRAPHICS ADAPTERS</span>
+                </div>
+                <div class="list-container" id="gpu-list"></div>
+            </article>
+
+            <!-- Displays Card -->
+            <article class="card">
+                <div class="card-header">
+                    <span class="card-title">DISPLAYS</span>
+                </div>
+                <div class="list-container" id="display-list"></div>
+            </article>
+
+            <!-- Storage Card -->
+            <article class="card span-2">
+                <div class="card-header">
+                    <span class="card-title">STORAGE VOLUMES</span>
+                </div>
+                <div class="disk-grid" id="disk-list"></div>
+            </article>
+
+            <!-- Network Card -->
+            <article class="card">
+                <div class="card-header">
+                    <span class="card-title">NETWORK INTERFACES</span>
+                </div>
+                <div class="list-container" id="network-list"></div>
+            </article>
+        </section>
     </main>
 
-    <footer>
-        <span>Lumi</span>
+    <!-- Minimalist Footer -->
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span class="footer-brand">LUMI SYSTEM MONITOR</span>
+                <span class="footer-copy">&copy; 2026. All rights reserved.</span>
+            </div>
+            <div class="footer-links">
+                <a style="cursor: pointer !important;" href="https://github.com/NexusWasLost/Lumi" target="_blank" class="footer-link">GitHub</a>
+                <a style="cursor: pointer !important;" href="https://github.com/NexusWasLost/Lumi/blob/main/LICENSE" class="footer-link">License</a>
+            </div>
+        </div>
     </footer>
+
+    <script src="./script.js"></script>
 </body>
 </html>
