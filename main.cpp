@@ -12,7 +12,7 @@ using json = nlohmann::json;
 
 std::string wideToUtf8(const wchar_t* wideText) {
     size_t requiredSize = UTF16toUTF8(wideText, nullptr, 0); //get the required size
-    OutputDebugStringA((std::to_string(requiredSize)).data());
+    // OutputDebugStringA((std::to_string(requiredSize)).data()); //for debuggin purposes
     std::string str(requiredSize, '\0');
     UTF16toUTF8(wideText, str.data(), requiredSize); //write to the string
     str.resize(requiredSize - 1); //remove the null terminator
