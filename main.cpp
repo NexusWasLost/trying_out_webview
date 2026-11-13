@@ -1,6 +1,7 @@
 #include "webview/webview.h"
 #include "lumi.h"
 #include "lumi_functions.h"
+#include "lumi_helpers.h"
 #include "json.hpp"
 
 #include <iostream>
@@ -9,19 +10,13 @@
 
 using json = nlohmann::json;
 
-std::string wideToUtf8(wchar_t* wideText) {
-    if (wideText == nullptr) {
-        return "";
-    }
-
-    int byteCount = WideCharToMultiByte(CP_UTF8, 0, wideText, -1, nullptr, 0, nullptr, nullptr);
-    if (byteCount <= 1) {
-        return "";
-    }
-
-    std::string utf8Text(byteCount - 1, '\0');
-    WideCharToMultiByte(CP_UTF8, 0, wideText, -1, &utf8Text[0], byteCount, nullptr, nullptr);
-    return utf8Text;
+std::string wideToUtf8(const wchar_t* wideText) {
+    size_t requiredSize = UTF16toUTF8(wideText, nullptr, 0); //get the required size
+    OutputDebugStringA((std::to_string(requiredSize)).data());
+    std::string str(requiredSize, '\0');
+    UTF16toUTF8(wideText, str.data(), requiredSize); //write to the string
+    str.resize(requiredSize - 1); //remove the null terminator
+    return str;
 }
 
 std::string lumi(const std::string& req){
